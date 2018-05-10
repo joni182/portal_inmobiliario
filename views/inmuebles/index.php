@@ -7,6 +7,13 @@ use yii\grid\GridView;
 /* @var $searchModel app\models\InmueblesSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
+$js = <<<JS
+        $('button').on('click', function(){
+            $(this).parent().find('p').css({'display':'inline'})
+        })
+JS;
+$this->registerJs($js);
+
 $this->title = 'Inmuebles';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
@@ -19,7 +26,8 @@ $this->params['breadcrumbs'][] = $this->title;
         <?= Html::a('Create Inmuebles', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
-    <?= GridView::widget([
+    <?=
+        GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
@@ -30,7 +38,13 @@ $this->params['breadcrumbs'][] = $this->title;
             'lavavajillas:boolean',
             'garaje:boolean',
             'trastero:boolean',
-
+            [
+                'label' => 'Contacta',
+                'content' => function ($model, $key, $index, $column) {
+                    $telefono = $model->propietario->telefono;
+                    return Html::button('Estoy interesado'). "<br><p style='display:none;'>Tel: $telefono <p>";
+                },
+            ],
             ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>

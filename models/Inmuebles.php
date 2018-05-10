@@ -2,8 +2,6 @@
 
 namespace app\models;
 
-use Yii;
-
 /**
  * This is the model class for table "inmuebles".
  *
@@ -58,8 +56,8 @@ class Inmuebles extends \yii\db\ActiveRecord
             'propietario_id' => 'Propietario ID',
             'propietario_dni' => 'Propietario Dni',
             'precio' => 'Precio',
-            'numero_habitaciones' => 'Numero Habitaciones',
-            'numero_banos' => 'Numero Banos',
+            'numero_habitaciones' => 'Numero de habitaciones',
+            'numero_banos' => 'Numero de baños',
             'caracteristicas' => 'Caracteristicas',
             'lavavajillas' => 'Lavavajillas',
             'garaje' => 'Garaje',
