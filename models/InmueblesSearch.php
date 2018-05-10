@@ -10,6 +10,10 @@ use yii\data\ActiveDataProvider;
  */
 class InmueblesSearch extends Inmuebles
 {
+    public $desde;
+    public $hasta;
+    public $min_hab;
+    public $min_ban;
     /**
      * {@inheritdoc}
      */
@@ -18,7 +22,7 @@ class InmueblesSearch extends Inmuebles
         return [
             [['id', 'propietario_id', 'numero_habitaciones', 'numero_banos'], 'integer'],
             [['propietario_dni', 'caracteristicas'], 'safe'],
-            [['precio'], 'number'],
+            [['precio', 'desde', 'hasta', 'min_ban', 'min_hab'], 'number'],
             [['lavavajillas', 'garaje', 'trastero'], 'boolean'],
         ];
     }
@@ -30,6 +34,11 @@ class InmueblesSearch extends Inmuebles
     {
         // bypass scenarios() implementation in the parent class
         return Model::scenarios();
+    }
+
+    public function attributes()
+    {
+        return array_merge(parent::attributes(), ['desde', 'hasta', 'min_hab', 'min_ban']);
     }
 
     /**
@@ -64,13 +73,17 @@ class InmueblesSearch extends Inmuebles
             'lavavajillas' => $this->lavavajillas,
             'garaje' => $this->garaje,
             'trastero' => $this->trastero,
+            'precio' => $this->precio,
+            'numero_habitaciones' => $this->numero_habitaciones,
+            'numero_banos' => $this->numero_banos,
         ]);
 
         $query->andFilterWhere(['ilike', 'propietario_dni', $this->propietario_dni])
             ->andFilterWhere(['ilike', 'caracteristicas', $this->caracteristicas])
-            ->andFilterWhere(['>=', 'precio', $this->precio])
-            ->andFilterWhere(['>=', 'numero_habitaciones', $this->numero_habitaciones])
-            ->andFilterWhere(['>=', 'numero_banos', $this->numero_banos]);
+            ->andFilterWhere(['>=', 'numero_banos', $this->min_ban])
+            ->andFilterWhere(['>=', 'numero_habitaciones', $this->min_hab])
+            ->andFilterWhere(['>=', 'precio', $this->desde])
+            ->andFilterWhere(['<=', 'precio', $this->hasta]);
 
         return $dataProvider;
     }

@@ -20,18 +20,16 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="inmuebles-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+    <?php echo $this->render('_search', ['model' => $searchModel]); ?>
 
-    <p>
-        <?= Html::a('Create Inmuebles', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
+
 
     <?=
         GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
-            'precio',
+            'precio:currency:Precio mínimo',
             'numero_habitaciones',
             'numero_banos',
             'caracteristicas:ntext',
@@ -42,10 +40,9 @@ $this->params['breadcrumbs'][] = $this->title;
                 'label' => 'Contacta',
                 'content' => function ($model, $key, $index, $column) {
                     $telefono = $model->propietario->telefono;
-                    return Html::button('Estoy interesado'). "<br><p style='display:none;'>Tel: $telefono <p>";
+                    return Html::button('Estoy interesado',['class' => 'btn btn-xs btn-success']). "<br><br><p style='display:none;'>Tel: $telefono <p>";
                 },
             ],
-            ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>
 </div>

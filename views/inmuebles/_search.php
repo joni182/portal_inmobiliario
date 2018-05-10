@@ -15,28 +15,22 @@ use yii\widgets\ActiveForm;
         'method' => 'get',
     ]); ?>
 
-    <?= $form->field($model, 'id') ?>
+    <?= $form->field($model, 'desde')->label('Precio desde') ?>
 
-    <?= $form->field($model, 'propietario_id') ?>
+    <?= $form->field($model, 'hasta')->label('Precio hasta') ?>
 
-    <?= $form->field($model, 'propietario_dni') ?>
+    <?= $form->field($model, 'min_hab')->label('Mínimo habitaciones') ?>
 
-    <?= $form->field($model, 'precio') ?>
+    <?= $form->field($model, 'min_ban')->label('Mínimo baños') ?>
 
-    <?= $form->field($model, 'numero_habitaciones') ?>
+    <?= $form->field($model, 'lavavajillas')->checkbox() ?>
 
-    <?php // echo $form->field($model, 'numero_banos') ?>
+    <?= $form->field($model, 'garaje')->checkbox() ?>
 
-    <?php // echo $form->field($model, 'caracteristicas') ?>
-
-    <?php // echo $form->field($model, 'lavavajillas')->checkbox() ?>
-
-    <?php // echo $form->field($model, 'garaje')->checkbox() ?>
-
-    <?php // echo $form->field($model, 'trastero')->checkbox() ?>
+    <?= $form->field($model, 'trastero')->checkbox() ?>
 
     <div class="form-group">
-        <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>
+        <?= Html::submitButton('Buscar', ['class' => 'btn btn-primary']) ?>
         <?= Html::resetButton('Reset', ['class' => 'btn btn-default']) ?>
     </div>
 
