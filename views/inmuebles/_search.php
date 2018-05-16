@@ -13,7 +13,19 @@ use yii\widgets\ActiveForm;
     <?php $form = ActiveForm::begin([
         'action' => ['index'],
         'method' => 'get',
-    ]); ?>
+        'options' => [
+            'style' => 'display:none',
+            'id' => 'busqueda-form',
+        ]
+    ]);
+
+    $desplegable = [
+            '' => '',
+            false => 'No',
+            true => 'Sí',
+        ];
+
+    ?>
 
     <?= $form->field($model, 'desde')->label('Precio desde') ?>
 
@@ -23,11 +35,11 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'min_ban')->label('Mínimo baños') ?>
 
-    <?= $form->field($model, 'lavavajillas')->checkbox() ?>
+    <?= $form->field($model, 'lavavajillas')->dropDownList($desplegable) ?>
 
-    <?= $form->field($model, 'garaje')->checkbox() ?>
+    <?= $form->field($model, 'garaje')->dropDownList($desplegable) ?>
 
-    <?= $form->field($model, 'trastero')->checkbox() ?>
+    <?= $form->field($model, 'trastero')->dropDownList($desplegable) ?>
 
     <div class="form-group">
         <?= Html::submitButton('Buscar', ['class' => 'btn btn-primary']) ?>

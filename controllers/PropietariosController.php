@@ -2,12 +2,12 @@
 
 namespace app\controllers;
 
-use Yii;
 use app\models\Propietarios;
 use app\models\PropietariosSearch;
+use Yii;
+use yii\filters\VerbFilter;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
-use yii\filters\VerbFilter;
 
 /**
  * PropietariosController implements the CRUD actions for Propietarios model.
@@ -46,7 +46,7 @@ class PropietariosController extends Controller
 
     /**
      * Displays a single Propietarios model.
-     * @param integer $id
+     * @param int $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
@@ -55,6 +55,16 @@ class PropietariosController extends Controller
         return $this->render('view', [
             'model' => $this->findModel($id),
         ]);
+    }
+
+    public function actionTelefonoAjax($idPropietario)
+    {
+        $telefonos = Propietarios::find()
+            ->select('telefono')
+            ->where(['id' => $idPropietario])
+            ->column();
+
+        return $telefonos[0];
     }
 
     /**
@@ -78,7 +88,7 @@ class PropietariosController extends Controller
     /**
      * Updates an existing Propietarios model.
      * If update is successful, the browser will be redirected to the 'view' page.
-     * @param integer $id
+     * @param int $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
@@ -98,7 +108,7 @@ class PropietariosController extends Controller
     /**
      * Deletes an existing Propietarios model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param integer $id
+     * @param int $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
@@ -112,7 +122,7 @@ class PropietariosController extends Controller
     /**
      * Finds the Propietarios model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param integer $id
+     * @param int $id
      * @return Propietarios the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
