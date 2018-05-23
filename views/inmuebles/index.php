@@ -39,9 +39,8 @@ $this->params['breadcrumbs'][] = $this->title;
     <?=
         GridView::widget([
         'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
         'columns' => [
-            'precio:currency:Precio mínimo',
+            'precio:currency',
             'numero_habitaciones',
             'numero_banos',
             'caracteristicas:ntext',
