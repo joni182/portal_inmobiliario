@@ -20,7 +20,7 @@ use yii\widgets\ActiveForm;
     ]);
 
     $desplegable = [
-            '' => '',
+            '' => '--Indiferente--',
             false => 'No',
             true => 'Sí',
         ];
