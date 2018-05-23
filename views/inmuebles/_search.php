@@ -13,9 +13,17 @@ use yii\widgets\ActiveForm;
     <?php $form = ActiveForm::begin([
         'action' => ['index'],
         'method' => 'get',
+        'options' => [
+            'style' => 'display:none',
+            'id' => 'busqueda-form',
+        ]
     ]);
 
-    $desplegable = ['' => 'Indiferente', '1' => 'Sí', '0' => 'No'];
+    $desplegable = [
+            '' => '',
+            false => 'No',
+            true => 'Sí',
+        ];
 
     ?>
 
